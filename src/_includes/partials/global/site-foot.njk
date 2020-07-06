@@ -1,0 +1,23 @@
+<footer role="contentinfo" class="c-site-foot{{ ' c-site-foot--compact' if page.url === '/' }}">
+  <div class="o-wrapper">
+    <div class="c-site-foot__inner">
+      {% if page.url != '/' %}
+      <article class="c-site-foot__details">
+        <h4>{{ site.name }}</h4>
+        <p>{{ site.description }}</p>
+      </article>
+      <hr class="o-hr o-hr--three-stars" aria-hidden="true">
+      {% endif %}
+
+      {% if site.showSmallPrint %}
+      {% include "partials/global/small-print.njk" %}
+      {% endif %}
+
+      {% if site.showThemeCredit %}
+      <p class="site-foot__credit">
+        <small>Powered by Virga</a>.  Made Proudly in Tokyo.</small>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</footer>

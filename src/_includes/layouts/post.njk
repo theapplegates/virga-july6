@@ -1,0 +1,46 @@
+{% extends 'layouts/base.njk' %}
+{% from 'macros/webmention.njk' import facepile, mediaObjectList %}
+
+{% set pageType = 'Post' %}
+
+{# Intro content #}
+{% set introHeading = title %}
+{% if author %}
+  {% set metaAuthor = author %}
+{% else %}
+  {% set metaAuthor = site.author.name %}
+{% endif %}
+{% set metaDate = date %}
+
+{% set introSummary %}
+  {% include "partials/components/post-meta.njk" %}
+{% endset %}
+
+{% block content %}
+<main id="main-content" tabindex="-1" class="page-{{ pageType | lower }}">
+  <article class="c-post h-entry">
+    {% include "partials/components/intro.njk" %}
+    <div class="c-post__body o-inner-wrapper">
+      {{ content | safe }}
+    </div>
+  </article>
+{% if tags %}
+  <hr class="o-hr o-hr--three-stars" aria-hidden="true">
+  <footer class="c-post__footer">
+    <div class="o-inner-wrapper">
+      <h3>Filed under</h3>
+      <nav class="c-navigation p-category">
+        {% for item in tags %}
+          <a href="/tags/{{ item | slug }}">{{ item }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </footer>
+{% endif %}
+{% if site.webmention %}
+  {% include "partials/components/webmention.njk" %}
+{% endif %}
+</main>
+{% endblock %}
+
+{{ content | safe }}
